@@ -1,0 +1,72 @@
+# Rust
+/target
+
+# Emacs
+\#*#
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Emacs > Org-mode
+.org-id-locations
+*_archive
+
+# Emacs > flymake-mode
+*_flymake.*
+
+# Emacs > eshell files
+/eshell/history
+/eshell/lastdir
+
+# Emacs > elpa packages
+/elpa/
+
+# Emacs > reftex files
+*.rel
+
+# Emacs > AUCTeX auto folder
+/auto/
+
+# Emacs > cask packages
+.cask/
+dist/
+
+# Emacs > Flycheck
+flycheck_*.el
+
+# Emacs > server auth directory
+/server/
+
+# Emacs > projectiles files
+.projectile
+
+# Emacs > directory configuration
+.dir-locals.el
+
+# Emacs > network security
+/network-security.data
+
+# Vim > Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Vim > Session
+Session.vim
+Sessionx.vim
+
+# Vim > Temporary
+.netrwhist
+*~
+# Vim > Auto-generated tag files
+tags
+# Vim > Persistent undo
+[._]*.un~
