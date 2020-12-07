@@ -76,8 +76,9 @@ pub fn price_diff(series: &[f64]) -> Option<(f64, f64)> {
         return None;
     }
 
-    // todo determine what relative price is
-    Some((series[series.len() - 1] - series[0], series[series.len() - 1] - series[0]))
+    // implement relative diff as % change
+    let diff = series[series.len() - 1] - series[0];
+    Some((diff, diff / series[0]))
 }
 
 #[cfg(test)]
@@ -105,6 +106,6 @@ mod tests {
     #[test]
     fn price_diff_works() {
         let test_vec: Vec<f64> = vec![1.3, 2.3, 3.3, 4.3, 5.3, 6.3, 7.3, 8.3, 9.3, 10.3];
-        assert_eq!(price_diff(&test_vec), Some((9.0, 9.0)));
+        assert_eq!(price_diff(&test_vec), Some((9.0, 9.0 / 1.3)));
     }
 }
