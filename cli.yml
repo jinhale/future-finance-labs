@@ -1,0 +1,23 @@
+name: future-finance-labs
+version: "0.1.0"
+author: Justin Hale <jinhale@gmail.com>
+about: MVP of market reporting CLI
+args:
+    - ticker:
+        short: t
+        long: ticker
+        value_name: TICKER_CODE
+        help: The three or two letter stock ticker codes
+        takes_value: true
+    - interval:
+        short: i
+        long: interval
+        value_name: INTERVAL_CODE
+        help: The smallest unit of time to measure
+        takes_value: true
+    - duration:
+        short: d
+        long: duration
+        value_name: DURATION_CODE
+        help: The range of time to consider
+        takes_value: true
