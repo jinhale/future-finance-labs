@@ -48,6 +48,10 @@ fn main() {
                 println!("quotes.len(): {}", quotes.len());
             }
         },
-        Err(e) => println!("error: {}", e),
+        Err(e) => {
+            eprintln!("Error: {}", e);
+
+            process::exit(1);
+        },
     }
 }
