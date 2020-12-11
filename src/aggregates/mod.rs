@@ -47,7 +47,7 @@ pub fn max(series: &[f64]) -> Option<f64> {
 // in that range.
 
 pub fn n_window_sma(n: usize, series: &[f64]) -> Option<Vec<f64>> {
-    if series.len() == 0 || n == 0 {
+    if series.len() == 0 || n == 0 || n > series.len() {
         return None;
     }
 
