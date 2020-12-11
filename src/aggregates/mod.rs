@@ -100,7 +100,9 @@ mod tests {
     #[test]
     fn n_window_sma_works() {
         let test_vec: Vec<f64> = vec![1.3, 2.3, 3.3, 4.3, 5.3, 6.3, 7.3, 8.3, 9.3, 10.3];
-        assert_eq!(n_window_sma(5, &test_vec), Some(vec![3.3, 8.3]));
+        assert_eq!(n_window_sma(5, &test_vec), Some(vec![3.3, 4.3, 5.3, 6.3, 7.3, 8.3]));
+    }
+
     }
 
     #[test]
