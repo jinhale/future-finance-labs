@@ -9,7 +9,7 @@ use clap::{Arg, App, SubCommand};
 
 fn main() {
     let yaml = load_yaml!("../cli.yml");
-    let matches = App::new("future-finance-labs")
+    let matches = App::new("ffl")
         .version("0.1.0")
         .author("Justin Hale <jinhale@gmail.com>")
         .about("Report market figures")
