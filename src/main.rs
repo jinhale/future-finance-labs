@@ -5,7 +5,7 @@ mod formatting;
 #[macro_use]
 extern crate clap;
 
-use clap::{Arg, App, SubCommand};
+use clap::{Arg, App};
 
 fn main() {
     let yaml = load_yaml!("../cli.yml");
