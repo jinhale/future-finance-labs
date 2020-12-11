@@ -78,9 +78,21 @@ mod tests {
     }
 
     #[test]
+    fn min_fails_well() {
+        let _vec = vec![];
+        assert_eq!(min(&_vec), None);
+    }
+
+    #[test]
     fn max_works() {
         let _vec = vec![-4.1, -5.1, 6.1, 7.1, -8.1, -9.1, 2.1];
         assert_eq!(max(&_vec), Some(7.1));
+    }
+
+    #[test]
+    fn max_fails_well() {
+        let _vec = vec![];
+        assert_eq!(max(&_vec), None);
     }
 
     #[test]
@@ -89,6 +101,22 @@ mod tests {
         assert_eq!(n_window_sma(5, &test_vec), Some(vec![3.3, 4.3, 5.3, 6.3, 7.3, 8.3]));
     }
 
+    #[test]
+    fn n_window_sma_bad_overlap_fails_well() {
+        let _vec: Vec<f64> = vec![1.3, 2.3, ];
+        assert_eq!(n_window_sma(5, &_vec), None);
+    }
+
+    #[test]
+    fn n_window_sma_no_fails_well() {
+        let _vec: Vec<f64> = vec![1.3, 2.3, ];
+        assert_eq!(n_window_sma(0, &_vec), None);
+    }
+
+    #[test]
+    fn n_window_sma_no_vec_fails_well() {
+        let _vec: Vec<f64> = vec![];
+        assert_eq!(n_window_sma(1, &_vec), None);
     }
 
     #[test]
