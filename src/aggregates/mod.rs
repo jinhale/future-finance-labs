@@ -51,22 +51,8 @@ pub fn n_window_sma(n: usize, series: &[f64]) -> Option<Vec<f64>> {
         return None;
     }
 
-    let duration = if n > series.len() { series.len() } else { n };
-    let mut sma_beginning = 0;
-    let mut sma_ending = duration;
-    let mut sma: Vec<f64> = vec![];
-
-    while sma_ending <= series.len() {
-        sma.push(series[sma_beginning..sma_ending].iter().fold(0.0, |acc, x| {
-            if x.is_nan() {
-                return acc;
-            }
-
-            return acc + x;
-        }) / (duration as f64));
-        sma_beginning += duration;
-        sma_ending += duration;
-    }
+    let sma_windows = series.windows(n);
+    let sma = sma_windows.map(|overton| overton.iter().sum::<f64>() / (n as f64)).collect();
 
     Some(sma)
 }
