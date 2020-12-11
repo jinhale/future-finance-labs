@@ -1,5 +1,5 @@
 [package]
-name = "future-finance-labs"
+name = "ffl"
 version = "0.1.0"
 authors = ["Justin Hale"]
 edition = "2018"
