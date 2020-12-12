@@ -6,7 +6,7 @@ use chrono::prelude::*;
 
 pub fn get_quotes<'a>(ticker: &'a str, interval: &'a str, range: &'a str) -> std::result::Result<Vec<yahoo::Quote>, &'a str> {
     let provider = yahoo::YahooConnector::new();
-    let response = provider.get_quote_range(ticker, interval, range);
+    let response = tokio_test::block_on(provider.get_quote_range(ticker, interval, range));
 
     match response {
         Ok(res) => Ok(res.quotes().unwrap()),
