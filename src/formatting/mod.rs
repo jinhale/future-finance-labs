@@ -1,25 +1,7 @@
 use yahoo_finance_api as yahoo;
 use chrono::{DateTime, TimeZone, Utc};
-use xactor::*;
 
 use super::aggregates;
-use super::aggregates::{SuperlativeActor, SuperlativeMessage, min, max};
-
-
-#[xactor::main]
-pub async fn main() -> Result<()> {
-    // Start actor and get its address
-    let mut addr = SuperlativeActor.start().await?;
-
-    let res = addr.call(SuperlativeMessage(min(&[1.1, 1_000_990.0, -1.234]))).await?;
-
-    match res {
-        Some(least) => println!("min: {}", least),
-        None => println!("none :-("),
-    };
-    // println!("res of min: {}", res.unwrap());
-    Ok(())
-}
 
 pub fn formatQuote<'a>(ticker: &'a str, series: &'a Vec<yahoo::Quote>) -> String {
     if series.len() == 0 {

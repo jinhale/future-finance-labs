@@ -18,7 +18,6 @@ tokio-test = "0.3.0"
 clap = "2.33.3"
 xactor = "0.7.9"
 async-trait = "0.1.42"
-actix = "0.10.0"
 
 [dev-dependencies]
 clap = {version = "2.33.3", features = ["yaml"]}

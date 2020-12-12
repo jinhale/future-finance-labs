@@ -2,8 +2,7 @@ use yahoo_finance_api as yahoo;
 use std::time::{Duration, UNIX_EPOCH};
 use chrono::{Utc,TimeZone};
 use chrono::prelude::*;
-use xactor::*;
-use tokio_test;
+// use tokio_test;
 
 pub fn get_quotes<'a>(ticker: &'a str, interval: &'a str, range: &'a str) -> std::result::Result<Vec<yahoo::Quote>, &'a str> {
     let provider = yahoo::YahooConnector::new();
