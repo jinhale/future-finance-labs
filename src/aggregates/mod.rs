@@ -1,5 +1,21 @@
 // Aggregate the closing (adjclose) prices and find their minimum (fn min(series: &[f64]) -> Option<f64>) and maximum (fn max(series: &[f64]) -> Option<f64>) across the period. What data structures and types from the standard library can you use?
 
+use xactor::*;
+
+#[message(result = "Option<f64>")]
+pub struct SuperlativeMessage(pub Option<f64>);
+
+pub struct SuperlativeActor;
+
+impl Actor for SuperlativeActor {}
+
+#[async_trait::async_trait]
+impl Handler<SuperlativeMessage> for SuperlativeActor {
+    async fn handle(&mut self, _ctx: &mut Context<Self>, msg: SuperlativeMessage) -> Option<f64> {
+        msg.0
+    }
+}
+
 pub fn min(series: &[f64]) -> Option<f64> {
     if series.len() == 0 {
         return None;
@@ -42,6 +58,20 @@ pub fn max(series: &[f64]) -> Option<f64> {
     }
 }
 
+#[message(result = "Option<Vec<f64>>")]
+struct SmaActor(Option<Vec<f64>>);
+
+struct MySmaActor;
+
+impl Actor for MySmaActor {}
+
+#[async_trait::async_trait]
+impl Handler<SmaActor> for MySmaActor {
+    async fn handle(&mut self, _ctx: &mut Context<Self>, msg: SmaActor) -> Option<Vec<f64>> {
+        msg.0
+    }
+}
+
 // A simple moving average (SMA) calculates the average of a selected
 // range of prices, usually closing prices, by the number of periods
 // in that range.
@@ -55,6 +85,20 @@ pub fn n_window_sma(n: usize, series: &[f64]) -> Option<Vec<f64>> {
     let sma = sma_windows.map(|overton| overton.iter().sum::<f64>() / (n as f64)).collect();
 
     Some(sma)
+}
+
+#[message(result = "Option<(f64, f64)>")]
+struct DiffActor(Option<(f64, f64)>);
+
+struct MyDiffActor;
+
+impl Actor for MyDiffActor {}
+
+#[async_trait::async_trait]
+impl Handler<DiffActor> for MyDiffActor {
+    async fn handle(&mut self, _ctx: &mut Context<Self>, msg: DiffActor) -> Option<(f64, f64)> {
+        msg.0
+    }
 }
 
 pub fn price_diff(series: &[f64]) -> Option<(f64, f64)> {

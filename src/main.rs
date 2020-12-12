@@ -4,6 +4,7 @@ mod formatting;
 
 use std::time::{Duration, Instant};
 use std::thread::sleep;
+use actix::*;
 
 #[macro_use]
 extern crate clap;
@@ -15,6 +16,10 @@ fn main() {
     let ticker = matches.value_of("ticker").unwrap_or("MSFT");
     let interval = matches.value_of("interval").unwrap_or("1d");
     let duration = matches.value_of("duration").unwrap_or("30d");
+
+    let system = actix::System::new("test");
+
+    system.run();
 
     loop {
         let maybe_quotes = api_interface::get_quotes(ticker, interval, duration);
