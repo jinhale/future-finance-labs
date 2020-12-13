@@ -1,5 +1,9 @@
 // Aggregate the closing (adjclose) prices and find their minimum (fn min(series: &[f64]) -> Option<f64>) and maximum (fn max(series: &[f64]) -> Option<f64>) across the period. What data structures and types from the standard library can you use?
 
+pub async fn async_min(series: &[f64]) -> Option<f64> {
+    min(series)
+}
+
 pub fn min(series: &[f64]) -> Option<f64> {
     if series.len() == 0 {
         return None;
@@ -19,6 +23,10 @@ pub fn min(series: &[f64]) -> Option<f64> {
         x if !x.is_nan() => Some(*x),
         _ => None,
     }
+}
+
+pub async fn async_max(series: &[f64]) -> Option<f64> {
+    max(series)
 }
 
 pub fn max(series: &[f64]) -> Option<f64> {
@@ -45,6 +53,9 @@ pub fn max(series: &[f64]) -> Option<f64> {
 // A simple moving average (SMA) calculates the average of a selected
 // range of prices, usually closing prices, by the number of periods
 // in that range.
+pub async fn async_n_window_sma(n: usize, series: &[f64]) -> Option<Vec<f64>> {
+    n_window_sma(n, series)
+}
 
 pub fn n_window_sma(n: usize, series: &[f64]) -> Option<Vec<f64>> {
     if series.len() == 0 || n == 0 || n > series.len() {
@@ -55,6 +66,10 @@ pub fn n_window_sma(n: usize, series: &[f64]) -> Option<Vec<f64>> {
     let sma = sma_windows.map(|overton| overton.iter().sum::<f64>() / (n as f64)).collect();
 
     Some(sma)
+}
+
+pub async fn async_price_diff(series: &[f64]) -> Option<(f64, f64)> {
+    price_diff(series)
 }
 
 pub fn price_diff(series: &[f64]) -> Option<(f64, f64)> {
