@@ -3,7 +3,7 @@ use chrono::{DateTime, TimeZone, Utc};
 
 use super::aggregates;
 
-pub fn formatQuote<'a>(ticker: &'a str, series: &'a Vec<yahoo::Quote>) -> String {
+pub fn format_quote<'a>(ticker: &'a str, series: &'a Vec<yahoo::Quote>) -> String {
     if series.len() == 0 {
         return "".to_string();
     }
@@ -41,6 +41,6 @@ pub fn formatQuote<'a>(ticker: &'a str, series: &'a Vec<yahoo::Quote>) -> String
     )
 }
 
-pub fn formatTitle() -> String {
+pub fn format_title() -> String {
     "period start,symbol,price,change %,min,max,30d avg".to_string()
 }

@@ -22,8 +22,8 @@ fn main() {
         match maybe_quotes {
             Ok(quotes) => {
                 if quotes.len() > 2 {
-                    println!("{}", formatting::formatTitle());
-                    println!("{}", formatting::formatQuote(&ticker, &quotes));
+                    println!("{}", formatting::format_title());
+                    println!("{}", formatting::format_quote(&ticker, &quotes));
                 } else {
                     println!("{:?}", quotes[0]);
                     println!("quotes.len(): {}", quotes.len());
