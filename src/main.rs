@@ -4,6 +4,7 @@ mod formatting;
 
 use std::time::{Duration, Instant};
 use std::thread::sleep;
+use futures::executor::block_on;
 
 #[macro_use]
 extern crate clap;
@@ -19,11 +20,12 @@ fn main() {
     loop {
         let maybe_quotes = api_interface::get_quotes(ticker, interval, duration);
 
-        match maybe_quotes {
+        match block_on(maybe_quotes) {
             Ok(quotes) => {
                 if quotes.len() > 2 {
+                    let future_quotes = formatting::format_quote(&ticker, &quotes);
                     println!("{}", formatting::format_title());
-                    println!("{}", formatting::format_quote(&ticker, &quotes));
+                    println!("{}", block_on(future_quotes));
                 } else {
                     println!("{:?}", quotes[0]);
                     println!("quotes.len(): {}", quotes.len());

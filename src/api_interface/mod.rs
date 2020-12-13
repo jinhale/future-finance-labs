@@ -4,7 +4,7 @@ use chrono::{Utc,TimeZone};
 use chrono::prelude::*;
 // use tokio_test;
 
-pub fn get_quotes<'a>(ticker: &'a str, interval: &'a str, range: &'a str) -> std::result::Result<Vec<yahoo::Quote>, &'a str> {
+pub async fn get_quotes<'a>(ticker: &'a str, interval: &'a str, range: &'a str) -> std::result::Result<Vec<yahoo::Quote>, &'a str> {
     let provider = yahoo::YahooConnector::new();
     let response = tokio_test::block_on(provider.get_quote_range(ticker, interval, range));
 
