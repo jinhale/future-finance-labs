@@ -1,3 +1,5 @@
+use actix::{Actor, Addr, Arbiter, Context, System};
+
 // Aggregate the closing (adjclose) prices and find their minimum (fn min(series: &[f64]) -> Option<f64>) and maximum (fn max(series: &[f64]) -> Option<f64>) across the period. What data structures and types from the standard library can you use?
 
 pub async fn async_min(series: &[f64]) -> Option<f64> {
