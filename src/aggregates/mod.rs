@@ -1,3 +1,6 @@
+
+use futures::executor::block_on;
+
 // Aggregate the closing (adjclose) prices and find their minimum (fn min(series: &[f64]) -> Option<f64>) and maximum (fn max(series: &[f64]) -> Option<f64>) across the period. What data structures and types from the standard library can you use?
 
 pub async fn async_min(series: &[f64]) -> Option<f64> {
@@ -93,6 +96,12 @@ mod tests {
     }
 
     #[test]
+    fn async_min_works() {
+        let _vec = vec![4.1, 5.1, 6.1, 7.1, 8.1, 9.1, -22.1];
+        assert_eq!(block_on(async_min(&_vec)), Some(-22.1));
+    }
+
+    #[test]
     fn min_fails_well() {
         let _vec = vec![];
         assert_eq!(min(&_vec), None);
@@ -102,6 +111,12 @@ mod tests {
     fn max_works() {
         let _vec = vec![-4.1, -5.1, 6.1, 7.1, -8.1, -9.1, 2.1];
         assert_eq!(max(&_vec), Some(7.1));
+    }
+
+    #[test]
+    fn async_max_works() {
+        let _vec = vec![-4.1, -5.1, 6.1, 7.1, -8.1, -9.1, 2.1];
+        assert_eq!(block_on(async_max(&_vec)), Some(7.1));
     }
 
     #[test]
@@ -135,8 +150,20 @@ mod tests {
     }
 
     #[test]
+    fn async_n_window_sma_works() {
+        let test_vec: Vec<f64> = vec![1.3, 2.3, 3.3, 4.3, 5.3, 6.3, 7.3, 8.3, 9.3, 10.3];
+        assert_eq!(block_on(async_n_window_sma(5, &test_vec)), Some(vec![3.3, 4.3, 5.3, 6.3, 7.3, 8.3]));
+    }
+
+    #[test]
     fn price_diff_works() {
         let test_vec: Vec<f64> = vec![1.3, 2.3, 3.3, 4.3, 5.3, 6.3, 7.3, 8.3, 9.3, 10.3];
         assert_eq!(price_diff(&test_vec), Some((9.0, 9.0 / 1.3)));
+    }
+
+    #[test]
+    fn async_diff_works() {
+        let test_vec: Vec<f64> = vec![1.3, 2.3, 3.3, 4.3, 5.3, 6.3, 7.3, 8.3, 9.3, 10.3];
+        assert_eq!(block_on(async_price_diff(&test_vec)), Some((9.0, 9.0 / 1.3)));
     }
 }
