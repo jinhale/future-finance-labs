@@ -1,6 +1,4 @@
-mod aggregates;
-mod api_interface;
-mod formatting;
+use ffl_utils::{aggregates, api_interface, formatting};
 
 use std::time::{Duration, Instant};
 use std::thread::sleep;
