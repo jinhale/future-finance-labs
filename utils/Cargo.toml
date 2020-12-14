@@ -21,3 +21,7 @@ tokio-test = "0.3.0"
 async-trait = "0.1.42"
 futures = "0.3.8"
 criterion = "0.3.3"
+
+[[bench]]
+name = "bench"
+harness = false
