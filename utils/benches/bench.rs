@@ -1,9 +1,15 @@
+use rand::Rng;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use ffl_utils::aggregates::{async_min, async_max, async_n_window_sma, async_price_diff};
 
 fn min_benchmark(c: &mut Criterion) {
-    let _vec = vec![4.1, 5.1, 6.1, 7.1, 8.1, 9.1, -2.1];
-    c.bench_function("async min", |b| b.iter(|| async_min(black_box(&_vec))));
+    let mut rng = rand::thread_rng();
+    let sample: Vec<f64> = (0..300).map(|_| rng.gen::<f64>()).collect();
+    c.bench_function("async min", |b| b.iter(|| async_min(black_box(&sample[0..25]))));
+    c.bench_function("async min", |b| b.iter(|| async_min(black_box(&sample[0..50]))));
+    c.bench_function("async min", |b| b.iter(|| async_min(black_box(&sample[0..100]))));
+    c.bench_function("async min", |b| b.iter(|| async_min(black_box(&sample[0..200]))));
+    c.bench_function("async min", |b| b.iter(|| async_min(black_box(&sample[0..300]))));
 }
 
 fn max_benchmark(c: &mut Criterion) {
