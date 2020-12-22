@@ -1,4 +1,5 @@
-use ffl_utils::{aggregates, api_interface, formatting};
+use ffl_utils::{aggregates, api_interface, formatting, };
+use chrono::{DateTime, TimeZone, Utc};
 
 use std::time::{Duration, Instant};
 use std::thread::sleep;
@@ -23,9 +24,10 @@ fn main() {
             match block_on(maybe_quotes) {
                 Ok(quotes) => {
                     if quotes.len() > 2 {
-                        let future_quotes = formatting::format_quote(&symbol, &quotes);
+                        let future_quotes = block_on(formatting::format_quote(&symbol, &quotes));
                         println!("{}", formatting::format_title());
-                        println!("{}", block_on(future_quotes));
+                        println!("{}", future_quotes);
+                        // formatting::write_csv_quotes(record)
                     } else {
                         println!("{:?}", quotes[0]);
                         println!("quotes.len(): {}", quotes.len());
@@ -40,7 +42,7 @@ fn main() {
 
         }
 
-        // sleep for 30 seconds 
+        // sleep for 30 seconds
         sleep(Duration::new(30, 0));
     }
 }
